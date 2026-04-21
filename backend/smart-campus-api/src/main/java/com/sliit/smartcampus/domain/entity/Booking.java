@@ -1,7 +1,6 @@
 package com.sliit.smartcampus.domain.entity;
 
 import com.sliit.smartcampus.domain.enums.BookingStatus;
-import com.sliit.smartcampus.domain.enums.null;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
