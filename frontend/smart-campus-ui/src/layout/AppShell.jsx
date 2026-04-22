@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
-
+import NotificationPanel from '../modules/auth-notifications/NotificationPanel'
 
 const navLinkStyle = ({ isActive }) => ({
   padding: '0.75rem 0.95rem',
@@ -61,7 +61,7 @@ export default function AppShell() {
           </nav>
 
           <div className="top-actions" ref={userMenuRef}>
-            
+            {user && <NotificationPanel />}
             {user ? (
               <div className="user-menu-wrapper">
                 <button
