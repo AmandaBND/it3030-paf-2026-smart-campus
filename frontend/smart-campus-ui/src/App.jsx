@@ -60,6 +60,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route
             path="/tickets/new"
             element={
