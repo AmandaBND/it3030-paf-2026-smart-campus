@@ -13,6 +13,7 @@ public record ResourceResponse(
 		ResourceType type,
 		Integer capacity,
 		String location,
+		String imageUrl,
 		LocalTime availableFrom,
 		LocalTime availableTo,
 		ResourceStatus status,
@@ -26,10 +27,19 @@ public record ResourceResponse(
 				r.getType(),
 				r.getCapacity(),
 				r.getLocation(),
+				toImageUrl(r.getImagePath()),
 				r.getAvailableFrom(),
 				r.getAvailableTo(),
 				r.getStatus(),
 				r.getCreatedAt(),
 				r.getUpdatedAt());
+	}
+
+	private static String toImageUrl(String path) {
+		if (path == null || path.isBlank()) {
+			return null;
+		}
+		String normalized = path.replace("\\", "/").replaceFirst("^/+", "");
+		return "/uploads/" + normalized;
 	}
 }

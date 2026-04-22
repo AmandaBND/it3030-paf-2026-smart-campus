@@ -46,6 +46,9 @@ public class Resource {
 	@Column(nullable = false, length = 255)
 	private String location;
 
+	@Column(name = "image_path", length = 500)
+	private String imagePath;
+
 	@Column(name = "available_from")
 	private LocalTime availableFrom;
 

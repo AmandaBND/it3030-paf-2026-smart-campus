@@ -1,0 +1,84 @@
+/* ExistingResourceDetails.css */
+.erd-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  min-height: 60vh;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.erd-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 420px;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0, 32, 128, 0.10), 0 1.5px 6px 0 rgba(0, 32, 128, 0.08);
+  overflow: hidden;
+  font-size: 1.08rem;
+}
+
+.erd-header {
+  background: linear-gradient(90deg, rgb(7, 30, 68) 0%, #0b528d 100%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgb(24, 96, 144), 0 0 2px #093a62;
+  padding: 1.2rem 0.5rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgb(0, 94, 255);
+}
+
+.erd-label {
+  font-weight: 600;
+  color: #1976d2;
+  background: #f5faff;
+  width: 160px;
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.erd-table td {
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid #e3e8f0;
+}
+
+.erd-table tr:last-child td {
+  border-bottom: none;
+}
+
+.erd-loading, .erd-error {
+  text-align: center;
+  margin-top: 3rem;
+  color: #1976d2;
+  font-size: 1.2rem;
+}
+.erd-error {
+  color: #d32f2f;
+}
+
+.erd-image-card {
+  min-width: 280px;
+  max-width: 360px;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(0, 32, 128, 0.10), 0 1.5px 6px 0 rgba(0, 32, 128, 0.08);
+  padding: 1rem;
+}
+
+.erd-image-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.erd-image {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e3e8f0;
+}

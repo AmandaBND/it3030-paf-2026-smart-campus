@@ -5,6 +5,9 @@ import AppShell from './layout/AppShell'
 import AuthCallback from './modules/auth-notifications/AuthCallback'
 import LoginPage from './modules/auth-notifications/LoginPage'
 import AdminResourcesPage from './modules/facilities-assets/AdminResourcesPage'
+import ExistingResourceDetails from './modules/facilities-assets/ExistingResourceDetails'
+import ResourceListPage from './modules/facilities-assets/ResourceListPage'
+import ResourceCalendarPage from './modules/facilities-assets/ResourceCalendarPage'
 import HomePage from './pages/HomePage'
 import AdminRoute from './routes/AdminRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
@@ -24,6 +27,26 @@ function App() {
                 <AdminResourcesPage />
               </AdminRoute>
             }
+          />
+          <Route
+            path="/facilities"
+            element={
+              <ProtectedRoute>
+                <ResourceListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/facilities/:resourceId/calendar"
+            element={
+              <ProtectedRoute>
+                <ResourceCalendarPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/facilities-assets/resources/:resourceId"
+            element={<ExistingResourceDetails />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
