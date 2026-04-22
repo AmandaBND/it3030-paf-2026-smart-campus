@@ -8,6 +8,9 @@ import AdminResourcesPage from './modules/facilities-assets/AdminResourcesPage'
 import ExistingResourceDetails from './modules/facilities-assets/ExistingResourceDetails'
 import ResourceListPage from './modules/facilities-assets/ResourceListPage'
 import ResourceCalendarPage from './modules/facilities-assets/ResourceCalendarPage'
+import TicketCreatePage from './modules/maintenance-tickets/TicketCreatePage'
+import TicketDashboardPage from './modules/maintenance-tickets/TicketDashboardPage'
+import TicketDetailPage from './modules/maintenance-tickets/TicketDetailPage'
 import HomePage from './pages/HomePage'
 import AdminRoute from './routes/AdminRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
@@ -47,6 +50,31 @@ function App() {
           <Route
             path="/facilities-assets/resources/:resourceId"
             element={<ExistingResourceDetails />}
+          />
+
+          <Route
+            path="/tickets"
+            element={
+              <ProtectedRoute>
+                <TicketDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tickets/new"
+            element={
+              <ProtectedRoute>
+                <TicketCreatePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tickets/:id"
+            element={
+              <ProtectedRoute>
+                <TicketDetailPage />
+              </ProtectedRoute>
+            }
           />
           <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
