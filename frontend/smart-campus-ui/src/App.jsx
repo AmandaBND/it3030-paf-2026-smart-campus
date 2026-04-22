@@ -37,6 +37,14 @@ function App() {
             }
           />
           <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <UserManagement />
+              </AdminRoute>
+            }
+          />
+          <Route
             path="/facilities/:resourceId/calendar"
             element={
               <ProtectedRoute>

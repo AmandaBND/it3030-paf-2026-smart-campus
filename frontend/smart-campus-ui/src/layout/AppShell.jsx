@@ -56,6 +56,9 @@ export default function AppShell() {
                 <NavLink to="/admin/bookings" style={navLinkStyle}>
                   Admin - Approvals
                 </NavLink>
+                <NavLink to="/admin/users" style={navLinkStyle}>
+                  Admin - Users
+                </NavLink>
               </>
             )}
           </nav>
