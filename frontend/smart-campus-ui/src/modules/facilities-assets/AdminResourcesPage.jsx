@@ -39,6 +39,7 @@ export default function AdminResourcesPage() {
   const [items, setItems] = useState([])
   const [form, setForm] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
   const [error, setError] = useState('')
   const [validationError, setValidationError] = useState('')
 
@@ -73,9 +74,14 @@ export default function AdminResourcesPage() {
       availableTo: form.availableTo || null,
       status: form.status,
     }
+    const formData = new FormData()
+    formData.append('resource', new Blob([JSON.stringify(body)], { type: 'application/json' }))
+    if (imageFile) {
+      formData.append('image', imageFile)
+    }
     const res = editingId
-      ? await apiFetch(`/api/resources/${editingId}`, { method: 'PUT', body: JSON.stringify(body) })
-      : await apiFetch('/api/resources', { method: 'POST', body: JSON.stringify(body) })
+      ? await apiFetch(`/api/resources/${editingId}`, { method: 'PUT', body: formData })
+      : await apiFetch('/api/resources', { method: 'POST', body: formData })
     const data = await parseJson(res)
     if (!res.ok) {
       setError(data?.error || 'Save failed')
@@ -83,6 +89,7 @@ export default function AdminResourcesPage() {
     }
     setForm(emptyForm)
     setEditingId(null)
+    setImageFile(null)
     await load()
   }
 
@@ -97,6 +104,7 @@ export default function AdminResourcesPage() {
       availableTo: r.availableTo ?? '',
       status: r.status,
     })
+    setImageFile(null)
   }
 
   const remove = async (id) => {
@@ -177,6 +185,17 @@ export default function AdminResourcesPage() {
               <option value="OUT_OF_SERVICE">OUT_OF_SERVICE</option>
             </select>
           </div>
+          <div className="field">
+            <label>Image (optional)</label>
+            <input
+              className="input"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            />
+            {editingId && !imageFile && <p className="muted">Leave empty to keep existing image.</p>}
+            {imageFile && <p className="muted">Selected: {imageFile.name}</p>}
+          </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button className="btn btn-primary" type="submit" disabled={validationError ? true : false}>
               {editingId ? 'Save changes' : 'Create resource'}
@@ -188,6 +207,7 @@ export default function AdminResourcesPage() {
                 onClick={() => {
                   setEditingId(null)
                   setForm(emptyForm)
+                  setImageFile(null)
                   setValidationError('')
                 }}
               >
@@ -211,7 +231,9 @@ export default function AdminResourcesPage() {
               <tbody>
                 {items.map((r) => (
                   <tr key={r.id}>
-                    <td>{r.name}</td>
+                    <td>
+                      <Link to={`/facilities-assets/resources/${r.id}`}>{r.name}</Link>
+                    </td>
                     <td>{r.type}</td>
                     <td style={{ textAlign: 'right' }}>
                       <button type="button" className="btn btn-ghost" onClick={() => edit(r)}>
