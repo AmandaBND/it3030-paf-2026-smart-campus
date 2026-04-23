@@ -5,7 +5,7 @@ import { useAuth } from '../../auth/AuthContext'
 
 export default function TicketDetailPage() {
   const { id } = useParams()
-  const { isAdmin } = useAuth()
+  const { isAdmin, isTechnician } = useAuth()
   const [ticket, setTicket] = useState(null)
   const [comments, setComments] = useState([])
   const [technicians, setTechnicians] = useState([])
@@ -167,29 +167,31 @@ export default function TicketDetailPage() {
               </button>
             </form>
           )}
-          <form onSubmit={updateStatus}>
-            <div className="field">
-              <label>Status</label>
-              <select className="select" value={status} onChange={(e) => setStatus(e.target.value)}>
-                <option value="OPEN">OPEN</option>
-                <option value="IN_PROGRESS">IN_PROGRESS</option>
-                <option value="RESOLVED">RESOLVED</option>
-                <option value="CLOSED">CLOSED</option>
-                <option value="REJECTED">REJECTED</option>
-              </select>
-            </div>
-            <div className="field">
-              <label>Resolution note</label>
-              <textarea className="textarea" value={resolution} onChange={(e) => setResolution(e.target.value)} />
-            </div>
-            <div className="field">
-              <label>Rejection reason</label>
-              <input className="input" value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} />
-            </div>
-            <button className="btn btn-accent" type="submit">
-              Update status
-            </button>
-          </form>
+          {(isAdmin || isTechnician) && (
+            <form onSubmit={updateStatus}>
+              <div className="field">
+                <label>Status</label>
+                <select className="select" value={status} onChange={(e) => setStatus(e.target.value)}>
+                  <option value="OPEN">OPEN</option>
+                  <option value="IN_PROGRESS">IN_PROGRESS</option>
+                  <option value="RESOLVED">RESOLVED</option>
+                  <option value="CLOSED">CLOSED</option>
+                  <option value="REJECTED">REJECTED</option>
+                </select>
+              </div>
+              <div className="field">
+                <label>Resolution note</label>
+                <textarea className="textarea" value={resolution} onChange={(e) => setResolution(e.target.value)} />
+              </div>
+              <div className="field">
+                <label>Rejection reason</label>
+                <input className="input" value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} />
+              </div>
+              <button className="btn btn-accent" type="submit">
+                Update status
+              </button>
+            </form>
+          )}
         </div>
       </div>
 

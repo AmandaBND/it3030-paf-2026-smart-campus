@@ -147,6 +147,15 @@ public class TicketService {
 			t.setRejectedReason(req.rejectedReason());
 		}
 		t = ticketRepository.save(t);
+		User assignedTech = t.getAssignedTo();
+		if (assignedTech != null && !assignedTech.getId().equals(user.getId())) {
+			notificationService.create(
+					assignedTech,
+					"Ticket updated",
+					"Ticket #" + t.getId() + " was updated to status " + t.getStatus(),
+					NotificationType.TICKET,
+					t.getId());
+		}
 		return toResponse(t);
 	}
 
