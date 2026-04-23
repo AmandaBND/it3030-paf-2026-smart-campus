@@ -127,7 +127,7 @@ export default function UserManagement() {
                       )}
                     </td>
                     <td>
-                      <span className={user.status === 'ACTIVE' ? 'badge badge-ok' : 'badge badge-bad'}>
+                      <span className={user.status === 'ACTIVE' ? 'badge badge-ok' : 'badge badge-ok'} style={{ background: user.status === 'ACTIVE' ? 'rgba(51, 171, 107, 0.2)' : 'rgba(156, 232, 158, 0.52)', color: user.status === 'ACTIVE' ? 'var(--color-ok)' : '#056301' }}>
                         {user.status || 'ACTIVE'}
                       </span>
                     </td>
