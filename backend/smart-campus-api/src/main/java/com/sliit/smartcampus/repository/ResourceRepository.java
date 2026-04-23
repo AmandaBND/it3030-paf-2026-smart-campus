@@ -11,4 +11,6 @@ public interface ResourceRepository extends JpaRepository<Resource, Long>, JpaSp
 	long countByType(ResourceType type);
 
 	long countByStatus(ResourceStatus status);
+
+	java.util.List<Resource> findByTypeAndStatusOrderByNameAsc(ResourceType type, ResourceStatus status);
 }

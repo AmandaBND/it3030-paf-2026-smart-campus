@@ -47,6 +47,11 @@ public class ResourceController {
 		return resourceService.findById(id);
 	}
 
+	@GetMapping("/categories/{type}/active")
+	public List<ResourceResponse> listActiveByCategory(@PathVariable ResourceType type) {
+		return resourceService.findActiveByType(type);
+	}
+
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ResourceResponse> create(@Valid @RequestBody ResourceRequest request) {

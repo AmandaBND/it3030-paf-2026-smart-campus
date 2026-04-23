@@ -5,6 +5,7 @@ import AppShell from './layout/AppShell'
 import AuthCallback from './modules/auth-notifications/AuthCallback'
 import LoginPage from './modules/auth-notifications/LoginPage'
 import AdminResourcesPage from './modules/facilities-assets/AdminResourcesPage'
+import CategoryFacilitiesPage from './modules/facilities-assets/CategoryFacilitiesPage'
 import ResourceListPage from './modules/facilities-assets/ResourceListPage'
 import ResourceCalendarPage from './modules/facilities-assets/ResourceCalendarPage'
 import AdminBookingsPage from './modules/booking-management/AdminBookingsPage'
@@ -40,6 +41,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ResourceCalendarPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/facilities/categories/:categoryType"
+            element={
+              <ProtectedRoute>
+                <CategoryFacilitiesPage />
               </ProtectedRoute>
             }
           />

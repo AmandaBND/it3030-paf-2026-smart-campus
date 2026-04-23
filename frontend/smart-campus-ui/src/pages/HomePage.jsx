@@ -5,13 +5,13 @@ export default function HomePage() {
   const { user } = useAuth()
 
   const facilities = [
-    { label: 'Lecture halls', tone: 'ok' },
-    { label: 'Labs', tone: 'ok' },
-    { label: 'Meeting rooms', tone: 'ok' },
-    { label: 'Projectors', tone: 'accent' },
-    { label: 'Cameras', tone: 'accent' },
-    { label: 'White boards', tone: 'accent' },
-    { label: 'General equipment', tone: 'accent' },
+    { label: 'Lecture halls', tone: 'ok', type: 'LECTURE_HALL' },
+    { label: 'Labs', tone: 'ok', type: 'LAB' },
+    { label: 'Meeting rooms', tone: 'ok', type: 'MEETING_ROOM' },
+    { label: 'Projectors', tone: 'accent', type: 'PROJECTOR' },
+    { label: 'Cameras', tone: 'accent', type: 'CAMERA' },
+    { label: 'White boards', tone: 'accent', type: 'WHITE_BOARD' },
+    { label: 'General equipment', tone: 'accent', type: 'EQUIPMENT' },
   ]
 
   return (
@@ -83,12 +83,13 @@ export default function HomePage() {
 
         <div className="home-feature-badges">
           {facilities.map((f) => (
-            <span
+            <Link
               key={f.label}
+              to={`/facilities/categories/${f.type}`}
               className={f.tone === 'ok' ? 'badge1 badge-ok' : 'badge1 badge-pending'}
             >
               {f.label}
-            </span>
+            </Link>
           ))}
         </div>
       </section>
