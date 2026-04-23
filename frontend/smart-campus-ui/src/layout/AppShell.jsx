@@ -35,7 +35,7 @@ export default function AppShell() {
       <header className="app-header">
         <div className="app-header-inner">
           <Link to="/" className="app-logo">
-            Smart Campus <span>Hub</span>
+            Campus Operations <span>Nexus</span>
           </Link>
 
           <nav className="top-nav">
@@ -153,7 +153,7 @@ export default function AppShell() {
             </article>
           </div>
           <p className="muted footer-note">
-            Smart Campus Operations Hub · React + Spring Boot · OAuth2 + JWT session bridge
+            <b>Campus Operations Nexus</b> · React + Spring Boot · OAuth2 + JWT session bridge
           </p>
         </div>
       </footer>
