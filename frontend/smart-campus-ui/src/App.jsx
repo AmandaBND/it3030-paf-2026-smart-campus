@@ -5,9 +5,13 @@ import AppShell from './layout/AppShell'
 import AuthCallback from './modules/auth-notifications/AuthCallback'
 import LoginPage from './modules/auth-notifications/LoginPage'
 import AdminResourcesPage from './modules/facilities-assets/AdminResourcesPage'
-import ExistingResourceDetails from './modules/facilities-assets/ExistingResourceDetails'
 import ResourceListPage from './modules/facilities-assets/ResourceListPage'
 import ResourceCalendarPage from './modules/facilities-assets/ResourceCalendarPage'
+import AdminBookingsPage from './modules/booking-management/AdminBookingsPage'
+import BookingFormPage from './modules/booking-management/BookingFormPage'
+import BookingsHubPage from './modules/booking-management/BookingsHubPage'
+import MyBookingsPage from './modules/booking-management/MyBookingsPage'
+import QrVerifyPage from './modules/booking-management/QrVerifyPage'
 import TicketCreatePage from './modules/maintenance-tickets/TicketCreatePage'
 import TicketDashboardPage from './modules/maintenance-tickets/TicketDashboardPage'
 import TicketDetailPage from './modules/maintenance-tickets/TicketDetailPage'
@@ -24,27 +28,11 @@ function App() {
         <Route element={<AppShell />}>
           <Route path="/" element={<HomePage />} />
           <Route
-            path="/admin/resources"
-            element={
-              <AdminRoute>
-                <AdminResourcesPage />
-              </AdminRoute>
-            }
-          />
-          <Route
             path="/facilities"
             element={
               <ProtectedRoute>
                 <ResourceListPage />
               </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/users"
-            element={
-              <AdminRoute>
-                <UserManagement />
-              </AdminRoute>
             }
           />
           <Route
@@ -56,10 +44,46 @@ function App() {
             }
           />
           <Route
-            path="/facilities-assets/resources/:resourceId"
-            element={<ExistingResourceDetails />}
+            path="/admin/resources"
+            element={
+              <AdminRoute>
+                <AdminResourcesPage />
+              </AdminRoute>
+            }
           />
-
+          <Route
+            path="/bookings"
+            element={
+              <ProtectedRoute>
+                <BookingsHubPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bookings/new"
+            element={
+              <ProtectedRoute>
+                <BookingFormPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bookings/my"
+            element={
+              <ProtectedRoute>
+                <MyBookingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/bookings/verify" element={<QrVerifyPage />} />
+          <Route
+            path="/admin/bookings"
+            element={
+              <AdminRoute>
+                <AdminBookingsPage />
+              </AdminRoute>
+            }
+          />
           <Route
             path="/tickets"
             element={
@@ -68,7 +92,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
           <Route
             path="/tickets/new"
             element={
@@ -86,8 +109,8 @@ function App() {
             }
           />
           <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-</Routes>
+        </Route>
+      </Routes>
     </AuthProvider>
   )
 }
