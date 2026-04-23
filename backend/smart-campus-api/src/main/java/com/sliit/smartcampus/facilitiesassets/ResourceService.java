@@ -48,6 +48,13 @@ public class ResourceService {
 		return ResourceResponse.from(r);
 	}
 
+	@Transactional(readOnly = true)
+	public List<ResourceResponse> findActiveByType(ResourceType type) {
+		return resourceRepository.findByTypeAndStatusOrderByNameAsc(type, ResourceStatus.ACTIVE).stream()
+				.map(ResourceResponse::from)
+				.toList();
+	}
+
 	@Transactional
 	public ResourceResponse create(ResourceRequest req, MultipartFile image) {
 		Resource r = Resource.builder()
