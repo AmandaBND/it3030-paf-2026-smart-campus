@@ -16,7 +16,16 @@ export default function HomePage() {
 
   return (
     <>
+    <section className="hero-gallery">
       
+        <div className="hero-gallery-slide slide-1" />
+        <div className="hero-gallery-slide slide-2" />
+        <div className="hero-gallery-slide slide-3" />
+        <div className="hero-gallery-overlay" />
+        <span className="hero-eyebrow">Easy Bookings</span>
+      </section>
+      
+    
     <div className="page home-page">
       
 
@@ -81,6 +90,35 @@ export default function HomePage() {
               {f.label}
             </span>
           ))}
+        </div>
+      </section>
+      <section className="home-middle-image page" aria-label="Campus services preview">
+        <img src="/images/middle_image.jpg" alt="Smart campus services" className="home-middle-image-content" />
+      </section>
+      <section className="home-services page">
+        <p className="home-services-description">
+          A unified digital platform designed to streamline campus operations by integrating facility bookings, asset management, and maintenance workflows into one seamless system.
+        </p>
+        <p className="home-services-description">
+          Our solution empowers students, staff, and administrators with real-time access, transparent processes, and efficient resource utilization - ensuring a smarter, more connected campus experience.
+        </p>
+        <p className="home-services-description">
+          From reserving study spaces to reporting issues and tracking resolutions, everything is managed in one place with clarity, control, and accountability.
+        </p>
+
+        <div className="home-services-grid">
+          <article className="card home-service-card">
+            <h3>QR Verification</h3>
+            <p>Secure check-ins and validations at access points using instant QR code verification.</p>
+          </article>
+          <article className="card home-service-card">
+            <h3>Easy Time Selection by Calendar</h3>
+            <p>Book facilities quickly with a calendar-based interface that helps avoid schedule conflicts.</p>
+          </article>
+          <article className="card home-service-card">
+            <h3>Notifications</h3>
+            <p>Stay updated with real-time alerts for bookings, approvals, assignments, and ticket updates.</p>
+          </article>
         </div>
       </section>
     </>

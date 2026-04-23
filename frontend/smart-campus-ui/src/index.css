@@ -85,7 +85,7 @@ p {
 }
 .card2 {
   border-radius: var(--radius);
-  padding: 4.25rem 7.35rem;
+  padding: 1.25rem 7.35rem;
   box-shadow: var(--shadow-soft);
   transition: all 0.3s ease;
 }
@@ -986,6 +986,48 @@ code {
   gap: 0.6rem;
 }
 
+.home-services {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.home-middle-image {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  max-height: 520px;
+}
+
+.home-middle-image-content {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  object-fit: cover;
+}
+
+.home-services-description {
+  color: var(--color-text-dark);
+  line-height: 1.75;
+  margin-bottom: 0.9rem;
+}
+
+.home-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.home-service-card h3 {
+  margin: 0 0 0.6rem;
+  color: var(--color-tertiary);
+}
+
+.home-service-card p {
+  margin: 0;
+  color: var(--color-text-dark);
+}
+
 @media (max-width: 940px) {
   .home-hero {
     grid-template-columns: 1fr;
@@ -1070,7 +1112,7 @@ footer .page {
   gap: 1.2rem;
   padding: 1.75rem;
   border-radius: 28px;
-  background: rgba(12, 22, 45, 0.92);
+  background: rgba(12, 34, 82, 0.71);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 24px 60px rgba(9, 30, 66, 0.25);
   backdrop-filter: blur(18px);
@@ -1085,7 +1127,7 @@ footer .page {
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(36, 96, 200, 0.22), rgba(212, 175, 55, 0.18));
+  background: linear-gradient(180deg, rgba(84, 127, 200, 0.22), rgba(212, 175, 55, 0.18));
   color: var(--color-primary);
   flex-shrink: 0;
 }
