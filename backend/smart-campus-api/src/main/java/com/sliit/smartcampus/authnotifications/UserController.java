@@ -9,6 +9,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -32,4 +35,23 @@ public class UserController {
 	public List<UserResponse> technicians() {
 		return userRepository.findByRole(UserRole.TECHNICIAN).stream().map(UserResponse::from).toList();
 	}
+
+	@GetMapping("")
+	@PreAuthorize("hasRole('ADMIN')")
+	public List<UserResponse> allUsers() {
+		return userRepository.findAll().stream().map(UserResponse::from).toList();
+	}
+
+	@PutMapping("/{id}/role")
+	@PreAuthorize("hasRole('ADMIN')")
+	public UserResponse updateRole(@PathVariable Long id, @RequestBody RoleUpdateRequest req) {
+		User user = userRepository.findById(id).orElseThrow();
+		user.setRole(UserRole.valueOf(req.role()));
+		userRepository.save(user);
+		return UserResponse.from(user);
+	}
+
+	public record RoleUpdateRequest(String role) {
+	}
+
 }
