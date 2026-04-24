@@ -83,7 +83,20 @@ export default function TicketCreatePage() {
         </div>
         <div className="field">
           <label>Attachments</label>
-          <input className="input" type="file" multiple onChange={(e) => setFiles(Array.from(e.target.files || []))} />
+          <input
+            className="input"
+            type="file"
+            multiple
+            onChange={(e) => {
+              const fileList = Array.from(e.target.files || [])
+              if (fileList.length > 3) {
+                setError('Maximum 3 attachments allowed')
+                return
+              }
+              setError('')
+              setFiles(fileList)
+            }}
+          />
         </div>
         {error && <p className="error">{error}</p>}
         <button className="btn btn-primary" type="submit">

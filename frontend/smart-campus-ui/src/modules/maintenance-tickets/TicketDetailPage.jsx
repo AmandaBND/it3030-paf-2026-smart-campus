@@ -5,7 +5,7 @@ import { useAuth } from '../../auth/AuthContext'
 
 export default function TicketDetailPage() {
   const { id } = useParams()
-  const { isAdmin, isTechnician } = useAuth()
+  const { user, isAdmin, isTechnician } = useAuth()
   const [ticket, setTicket] = useState(null)
   const [comments, setComments] = useState([])
   const [technicians, setTechnicians] = useState([])
@@ -209,11 +209,32 @@ export default function TicketDetailPage() {
         <div style={{ marginTop: '1rem' }}>
           {comments.map((c) => (
             <div key={c.id} style={{ padding: '0.65rem 0', borderBottom: '1px solid rgba(212, 175, 55, 0.15)' }}>
-              <div style={{ fontWeight: 700 }}>
-                {c.userName} ·{' '}
-                <span className="muted" style={{ fontWeight: 500 }}>
-                  {c.createdAt}
+              <div style={{ fontWeight: 700, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>
+                  {c.userName} ·{' '}
+                  <span className="muted" style={{ fontWeight: 500 }}>
+                    {new Date(c.createdAt).toLocaleString()}
+                  </span>
                 </span>
+                {(c.userId === user?.id || isAdmin) && (
+                  <button
+                    type="button"
+                    className="btn btn-ghost"
+                    style={{ padding: '0.2rem 0.5rem', fontSize: '0.85rem' }}
+                    onClick={async () => {
+                      const res = await apiFetch(`/api/tickets/${id}/comments/${c.id}`, {
+                        method: 'DELETE',
+                      })
+                      if (!res.ok) {
+                        setError('Failed to delete comment')
+                        return
+                      }
+                      await load()
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
               <div>{c.commentText}</div>
             </div>
