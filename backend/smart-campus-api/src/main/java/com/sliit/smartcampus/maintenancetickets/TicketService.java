@@ -81,6 +81,12 @@ public class TicketService {
 				.build();
 		t = ticketRepository.save(t);
 		if (files != null) {
+			long nonEmptyCount = files.stream()
+					.filter(f -> f != null && !f.isEmpty())
+					.count();
+			if (nonEmptyCount > 3) {
+				throw new IllegalArgumentException("Maximum 3 attachments allowed");
+			}
 			for (MultipartFile file : files) {
 				if (file != null && !file.isEmpty()) {
 					saveAttachment(t, file);
@@ -189,6 +195,16 @@ public class TicketService {
 		return commentRepository.findByTicketOrderByCreatedAtAsc(t).stream()
 				.map(CommentResponse::from)
 				.toList();
+	}
+
+	@Transactional
+	public void deleteComment(Long commentId, User currentUser) {
+		Comment c = commentRepository.findById(commentId)
+				.orElseThrow(() -> new IllegalArgumentException("Comment not found: " + commentId));
+		if (!c.getUser().getId().equals(currentUser.getId()) && currentUser.getRole() != UserRole.ADMIN) {
+			throw new AccessDeniedException("Not allowed to delete this comment");
+		}
+		commentRepository.deleteById(commentId);
 	}
 
 	private void assertCanView(Ticket t, User u) {

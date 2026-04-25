@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFetch, parseJson } from '../../api/client'
@@ -65,6 +66,23 @@ export default function UserManagement() {
       setUpdateError('Error updating role: ' + (err?.message || 'Unknown error'))
     } finally {
       setUpdatingId(null)
+    }
+  }
+    const deleteUser = async (userId) => {
+    if (!window.confirm('Are you sure you want to delete this user?')) return;
+    setUpdateError('');
+    setUpdatingId(userId);
+    try {
+      const res = await apiFetch(`/api/users/${userId}`, { method: 'DELETE' });
+      if (res.ok) {
+        await load();
+      } else {
+        setUpdateError('Failed to delete user');
+      }
+    } catch (err) {
+      setUpdateError('Error deleting user: ' + (err?.message || 'Unknown error'));
+    } finally {
+      setUpdatingId(null);
     }
   }
 
@@ -154,9 +172,22 @@ export default function UserManagement() {
                           </button>
                         </div>
                       ) : (
-                        <button type="button" className="btn btn-ghost" onClick={() => startEdit(user)}>
-                          Edit
-                        </button>
+                        <>
+                          <button type="button" className="btn btn-ghost" onClick={() => startEdit(user)}>
+                            Edit
+                          </button>
+                          {user.role === 'USER' && (
+                            <button
+                              type="button"
+                              className="btn btn-bad"
+                              style={{ marginLeft: 8, fontSize: '0.85rem', padding: '0.5rem 0.75rem' }}
+                              onClick={() => deleteUser(user.id)}
+                              disabled={updatingId === user.id}
+                            >
+                              Delete
+                            </button>
+                          )}
+                        </>
                       )}
                     </td>
                   </tr>

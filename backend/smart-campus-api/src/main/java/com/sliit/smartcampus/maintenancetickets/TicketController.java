@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,5 +84,14 @@ public class TicketController {
 	@GetMapping("/{id}/comments")
 	public List<CommentResponse> listComments(@PathVariable Long id, @AuthenticationPrincipal User user) {
 		return ticketService.listComments(id, user);
+	}
+
+	@DeleteMapping("/{id}/comments/{commentId}")
+	public ResponseEntity<Void> deleteComment(
+			@PathVariable Long id,
+			@PathVariable Long commentId,
+			@AuthenticationPrincipal User user) {
+		ticketService.deleteComment(commentId, user);
+		return ResponseEntity.noContent().build();
 	}
 }
