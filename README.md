@@ -5,7 +5,6 @@ University web platform to  manage facility and asset bookings (rooms, labs, equ
 git clone <https://github.com/AmandaBND/it3030-paf-2026-smart-campus.git>
 
 cd it3030-paf-2026-smart-campus
-
 # frontend
 cd frontend/smart-campus-ui
 npm install
