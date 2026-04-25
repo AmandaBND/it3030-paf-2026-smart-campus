@@ -19,6 +19,7 @@ import TicketDetailPage from './modules/maintenance-tickets/TicketDetailPage'
 import HomePage from './pages/HomePage'
 import AdminRoute from './routes/AdminRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
+import UserManagement from './modules/auth-notifications/UserManagement'
 
 function App() {
   return (
@@ -115,6 +116,14 @@ function App() {
               <ProtectedRoute>
                 <TicketDetailPage />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <UserManagement />
+              </AdminRoute>
             }
           />
           <Route path="*" element={<Navigate to="/" replace />} />

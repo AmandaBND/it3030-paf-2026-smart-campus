@@ -1,3 +1,4 @@
+
 package com.sliit.smartcampus.authnotifications;
 
 import com.sliit.smartcampus.authnotifications.dto.UserResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
@@ -49,6 +51,16 @@ public class UserController {
 		user.setRole(UserRole.valueOf(req.role()));
 		userRepository.save(user);
 		return UserResponse.from(user);
+	}
+
+	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteUser(@PathVariable Long id) {
+		User user = userRepository.findById(id).orElseThrow();
+		if (user.getRole() == UserRole.ADMIN) {
+			throw new RuntimeException("Cannot delete admin users");
+		}
+		userRepository.deleteById(id);
 	}
 
 	public record RoleUpdateRequest(String role) {
